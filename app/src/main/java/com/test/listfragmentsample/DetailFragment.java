@@ -1,44 +1,33 @@
-    package com.test.listfragmentsample;
+package com.test.listfragmentsample;
 
 import android.app.Activity;
-import android.app.ListFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SampleFragment.OnFragmentInteractionListener} interface
+ * {@link DetailFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SampleFragment#newInstance} factory method to
+ * Use the {@link DetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SampleFragment extends ListFragment{
+public class DetailFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private OnFragmentInteractionListener mListener;
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    static List<String> dataList = new ArrayList<String>();
-    static ArrayAdapter<String> adapter;
+    private OnFragmentInteractionListener mListener;
 
     /**
      * Use this factory method to create a new instance of
@@ -46,11 +35,11 @@ public class SampleFragment extends ListFragment{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SampleFrgment.
+     * @return A new instance of fragment DetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SampleFragment newInstance(String param1, String param2) {
-        SampleFragment fragment = new SampleFragment();
+    public static DetailFragment newInstance(String param1, String param2) {
+        DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,7 +47,7 @@ public class SampleFragment extends ListFragment{
         return fragment;
     }
 
-    public SampleFragment() {
+    public DetailFragment() {
         // Required empty public constructor
     }
 
@@ -75,41 +64,14 @@ public class SampleFragment extends ListFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        return inflater.inflate(R.layout.fragment_sample_frgment, container, false);
+        return inflater.inflate(R.layout.fragment_detail, container, false);
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        setAdapter();
-
-        getView().findViewById(R.id.addItem).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addItem("HOGE");
-            }
-        });
-    }
-
-    protected void addItem(String comment){
-        adapter.add(comment);
-    }
-
-    protected void setAdapter(){
-        adapter = new ArrayAdapter<String>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                dataList);
-        setListAdapter(adapter);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        Log.d("", position + "has been clicked");
-
-        mListener.onFragmentInteraction(position);
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
     }
 
     @Override
@@ -139,9 +101,9 @@ public class SampleFragment extends ListFragment{
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(int position);
+        public void onFragmentInteraction(Uri uri);
     }
+
 }
