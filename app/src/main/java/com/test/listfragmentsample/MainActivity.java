@@ -16,10 +16,10 @@ public class MainActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SampleFragment sampleFrgment = new SampleFragment();
+        SampleFragment sampleFragment = new SampleFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, sampleFrgment);
+        fragmentTransaction.add(R.id.fragment_container, sampleFragment);
         fragmentTransaction.commit();
     }
 
